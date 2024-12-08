@@ -1,0 +1,28 @@
+# .github/workflows/cd.yml
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ prod ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Minikube
+      uses: medyagh/setup-minikube@master
+
+    - name: Deploy to Minikube
+      run: |
+        minikube start
+        kubectl apply -f k8s/pvc.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        kubectl rollout status deployment/weather-api
+
+    - name: Get Service URL
+      run: |
+        minikube service weather-api-service --url
