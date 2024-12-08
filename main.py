@@ -124,7 +124,7 @@ def login():
                 'username': user.username
             })
 
-        return jsonify({'message': 'Invalid credentials'}), 401
+        return jsonify({'message': 'Invalid credentials ok'}), 401
 
     except Exception as e:
         return jsonify({'message': f'Login failed: {str(e)}'}), 500
