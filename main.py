@@ -188,7 +188,7 @@ def get_weather(current_user, city):
             return jsonify(weather_data)
         else:
             return jsonify({
-                "error": "Failed to fetch weather data",
+                "error": "Failed to fetch weather data ok",
                 "status_code": response.status_code
             }), response.status_code
 
