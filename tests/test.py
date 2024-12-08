@@ -1,83 +1,74 @@
 # tests/test_api.py
-import unittest
-import json
-import sys
-import os
-
-# Add the parent directory to Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import pytest
 from main import app, db, User, SearchHistory
 
 
-class WeatherAPITests(unittest.TestCase):
-    def setUp(self):
-        app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-        self.client = app.test_client()
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
+    with app.test_client() as client:
         with app.app_context():
             db.create_all()
-
-    def tearDown(self):
-        with app.app_context():
+            yield client
             db.session.remove()
             db.drop_all()
 
-    def test_register(self):
-        response = self.client.post('/register',
-                                    json={
-                                        'username': 'testuser',
-                                        'email': 'test@test.com',
-                                        'password': 'testpass123'
-                                    }
-                                    )
-        self.assertEqual(response.status_code, 201)
 
-    def test_login(self):
-        # First register a user
-        self.client.post('/register',
-                         json={
-                             'username': 'testuser',
-                             'email': 'test@test.com',
-                             'password': 'testpass123'
-                         }
-                         )
-
-        # Then try to login
-        response = self.client.post('/login',
-                                    json={
-                                        'email': 'test@test.com',
-                                        'password': 'testpass123'
-                                    }
-                                    )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('token', response.json)
-
-    def test_weather_endpoint(self):
-        # Register and login to get token
-        self.client.post('/register',
-                         json={
-                             'username': 'testuser',
-                             'email': 'test@test.com',
-                             'password': 'testpass123'
-                         }
-                         )
-
-        login_response = self.client.post('/login',
-                                          json={
-                                              'email': 'test@test.com',
-                                              'password': 'testpass123'
-                                          }
-                                          )
-
-        token = login_response.json['token']
-
-        # Test weather endpoint
-        response = self.client.get('/weather/London',
-                                   headers={'Authorization': f'Bearer {token}'}
-                                   )
-        self.assertEqual(response.status_code, 200)
+def test_register(client):
+    response = client.post('/register',
+                           json={
+                               'username': 'testuser',
+                               'email': 'test@test.com',
+                               'password': 'testpass123'
+                           }
+                           )
+    assert response.status_code == 201
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_login(client):
+    # First register a user
+    client.post('/register',
+                json={
+                    'username': 'testuser',
+                    'email': 'test@test.com',
+                    'password': 'testpass123'
+                }
+                )
+
+    # Then try to login
+    response = client.post('/login',
+                           json={
+                               'email': 'test@test.com',
+                               'password': 'testpass123'
+                           }
+                           )
+    assert response.status_code == 200
+    assert 'token' in response.json
+
+
+def test_weather_endpoint(client):
+    # Register and login to get token
+    client.post('/register',
+                json={
+                    'username': 'testuser',
+                    'email': 'test@test.com',
+                    'password': 'testpass123'
+                }
+                )
+
+    login_response = client.post('/login',
+                                 json={
+                                     'email': 'test@test.com',
+                                     'password': 'testpass123'
+                                 }
+                                 )
+
+    token = login_response.json['token']
+
+    # Test weather endpoint
+    response = client.get('/weather/London',
+                          headers={'Authorization': f'Bearer {token}'}
+                          )
+    assert response.status_code == 200
