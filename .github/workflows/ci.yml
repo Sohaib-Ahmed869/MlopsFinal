@@ -23,12 +23,6 @@ jobs:
 
     - name: Run tests
       run: |
+        mkdir -p instance
         export PYTHONPATH=$PYTHONPATH:$(pwd)
-        python -m pytest tests/ -v
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      if: success()  # Only run if tests pass
-      with:
-        push: false  # Set to true when you have Docker Hub credentials
-        tags: weather-api:latest
+        pytest tests/ -v --disable-warnings

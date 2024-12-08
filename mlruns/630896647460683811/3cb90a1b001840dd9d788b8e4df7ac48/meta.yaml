@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/sohai/PycharmProjects/mlopsFinal/mlruns/630896647460683811/3cb90a1b001840dd9d788b8e4df7ac48/artifacts
+end_time: 1733680556192
+entry_point_name: ''
+experiment_id: '630896647460683811'
+lifecycle_stage: active
+run_id: 3cb90a1b001840dd9d788b8e4df7ac48
+run_name: bittersweet-deer-226
+run_uuid: 3cb90a1b001840dd9d788b8e4df7ac48
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733680549759
+status: 3
+tags: []
+user_id: sohai
