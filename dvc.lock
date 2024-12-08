@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  collect_data:
+    cmd: python run_dag_task.py collect_data
+    deps:
+    - path: run_dag_task.py
+      hash: md5
+      md5: ddafb579a67c24da751441f3e8760713
+      size: 617
+    - path: weather_functions.py
+      hash: md5
+      md5: 87bbcf46feb35ac52ca91f44c3f74bd9
+      size: 3569
+    outs:
+    - path: weather_data.csv
+      hash: md5
+      md5: 6e0d7735dd3db861464e6786afed434b
+      size: 335
+  preprocess:
+    cmd: python run_dag_task.py preprocess_data
+    deps:
+    - path: run_dag_task.py
+      hash: md5
+      md5: ddafb579a67c24da751441f3e8760713
+      size: 617
+    - path: weather_data.csv
+      hash: md5
+      md5: 6e0d7735dd3db861464e6786afed434b
+      size: 335
+    - path: weather_functions.py
+      hash: md5
+      md5: 87bbcf46feb35ac52ca91f44c3f74bd9
+      size: 3569
+    outs:
+    - path: processed_weather_data.csv
+      hash: md5
+      md5: 74a890c9b290d21952e9c1c201a40844
+      size: 482
+  train:
+    cmd: python train_model.py
+    deps:
+    - path: processed_weather_data.csv
+      hash: md5
+      md5: 74a890c9b290d21952e9c1c201a40844
+      size: 482
+    - path: train_model.py
+      hash: md5
+      md5: e65dcab4e85cb53ba35cd18138501eed
+      size: 2504
+    outs:
+    - path: metrics.yaml
+      hash: md5
+      md5: ab52348dca7011daea89383499ebfc10
+      size: 30
+    - path: model.pkl
+      hash: md5
+      md5: e62b10b9db521f7207ab165ab799c7bb
+      size: 1227
