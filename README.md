@@ -53,22 +53,19 @@ A production-ready weather prediction system implementing MLOps best practices. 
 ## Project Structure
 weather-prediction/
 ├── src/
-│   └── main.py           # Main Flask application
+│   └── main.py
 ├── tests/
-│   ├── init.py
-│   └── test_api.py       # API tests
+│   └── test_api.py
 ├── k8s/
 │   ├── deployment.yaml
 │   ├── service.yaml
 │   └── pvc.yaml
-├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── cd.yml
+├── .github/workflows/
+│   ├── ci.yml
+│   └── cd.yml
 ├── requirements.txt
 ├── Dockerfile
-├── dvc.yaml
-└── README.md
+└── dvc.yaml
 
 ## Prerequisites
 - Python 3.9+
