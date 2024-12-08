@@ -1,0 +1,13 @@
+# params.yaml
+train:
+  test_size: 0.2
+  random_state: 42
+
+model:
+  type: LinearRegression
+  features:
+    - Humidity (%)
+    - Wind Speed (m/s)
+    - Hour
+    - Is_Day
+    - Weather_Category

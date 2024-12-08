@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/sohai/PycharmProjects/mlopsFinal/mlruns/630896647460683811/defbf51a082f46c3993dbfd9335b76aa/artifacts
+end_time: 1733675087141
+entry_point_name: ''
+experiment_id: '630896647460683811'
+lifecycle_stage: active
+run_id: defbf51a082f46c3993dbfd9335b76aa
+run_name: painted-zebra-601
+run_uuid: defbf51a082f46c3993dbfd9335b76aa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733675082971
+status: 3
+tags: []
+user_id: sohai

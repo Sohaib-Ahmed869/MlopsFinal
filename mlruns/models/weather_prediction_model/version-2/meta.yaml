@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1733675087128
+current_stage: None
+description: null
+last_updated_timestamp: 1733675087128
+name: weather_prediction_model
+run_id: defbf51a082f46c3993dbfd9335b76aa
+run_link: null
+source: file:///C:/Users/sohai/PycharmProjects/mlopsFinal/mlruns/630896647460683811/defbf51a082f46c3993dbfd9335b76aa/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/sohai/PycharmProjects/mlopsFinal/mlruns/630896647460683811/defbf51a082f46c3993dbfd9335b76aa/artifacts/model
+user_id: null
+version: 2

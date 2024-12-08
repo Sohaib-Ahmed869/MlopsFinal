@@ -1,0 +1,31 @@
+test_mae: !!python/object/apply:numpy._core.multiarray.scalar
+- &id001 !!python/object/apply:numpy.dtype
+  args:
+  - f8
+  - false
+  - true
+  state: !!python/tuple
+  - 3
+  - <
+  - null
+  - null
+  - null
+  - -1
+  - -1
+  - 0
+- !!binary |
+  n+tRuB69aEA=
+test_r2: .nan
+test_rmse: !!python/object/apply:numpy._core.multiarray.scalar
+- *id001
+- !!binary |
+  n+tRuB69aEA=
+train_mae: !!python/object/apply:numpy._core.multiarray.scalar
+- *id001
+- !!binary |
+  AAAAAAAAEz0=
+train_r2: 1.0
+train_rmse: !!python/object/apply:numpy._core.multiarray.scalar
+- *id001
+- !!binary |
+  FUNNi6s/GD0=

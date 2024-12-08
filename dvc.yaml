@@ -1,0 +1,29 @@
+# dvc.yaml
+stages:
+  collect_data:
+    cmd: python run_dag_task.py collect_data
+    deps:
+      - weather_functions.py
+      - run_dag_task.py
+    outs:
+      - weather_data.csv
+
+  preprocess:
+    cmd: python run_dag_task.py preprocess_data
+    deps:
+      - weather_functions.py
+      - run_dag_task.py
+      - weather_data.csv
+    outs:
+      - processed_weather_data.csv
+
+  train:
+    cmd: python train_model.py
+    deps:
+      - train_model.py
+      - processed_weather_data.csv
+    outs:
+      - model.pkl
+    metrics:
+      - metrics.yaml:
+          cache: false
